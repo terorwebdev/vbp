@@ -1,0 +1,13 @@
+<div class="box-opener" (click)="toggle()">
+    <mat-icon>settings_applications</mat-icon>
+    <mat-icon>undo</mat-icon>
+    <mat-icon>redo</mat-icon>
+</div>
+
+<app-left-nav class="left" [class.opened]="show">
+</app-left-nav>
+
+<app-layout></app-layout>
+
+<app-right-nav class="right"></app-right-nav>
+<app-upload-view></app-upload-view>

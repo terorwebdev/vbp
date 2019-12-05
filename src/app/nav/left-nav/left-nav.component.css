@@ -1,0 +1,26 @@
+.box-opener {
+    padding: 5px;
+    display: inline-block;
+    z-index: 1;
+}
+
+.closeleft {
+    position: absolute;
+    cursor: pointer;
+    right: 5px;
+    top: 20px;
+}
+
+.color {
+    display: inline-block;
+    cursor: pointer;
+    margin: 2px;
+    height: 48px;
+    width: 48px;
+}
+
+.menu-item {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

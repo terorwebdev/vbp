@@ -1,0 +1,36 @@
+<div class="box-opener">
+    <h2>Virtual Brainstorming</h2>
+</div>
+
+<div class="closeleft">
+    <mat-icon (click)="toggle()">clear</mat-icon>
+</div>
+
+<div class="menu-item">
+    <h3>
+        Pick Color
+    </h3>
+    <div class="colors">
+        <div class="color" *ngFor="let item of colorList" [ngStyle]="{'background-color': item.hex}" (click)="toggleColor(item)"></div>
+    </div>
+</div>
+
+<div class="menu-item">
+    <h3>
+        Adjust Size
+    </h3>
+    <mat-slider style="width:80%;" (input)="fontSize = $event.value" [value]="fontSize" [(ngModel)]="fontSize" (ngModelChange)="fontSizeChange($event)">
+    </mat-slider>
+    {{ fontSize }}
+</div>
+
+<div class="menu-item">
+    <h3>
+        Line Style
+    </h3>
+    <label *ngFor="let radiobutton of lineStyleList">
+    <input type="radio" name="options" (click)="toggleLineStyle(radiobutton)"
+      [checked]="radiobutton === initLineStyle.option">
+      {{radiobutton}}
+  </label>
+</div>
