@@ -8,7 +8,7 @@ import { RightNavComponent } from './nav/right-nav/right-nav.component';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://192.168.5.132:3000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 const routes: Routes = [
   { path: '', component: InitComponent },

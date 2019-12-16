@@ -58,6 +58,23 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
       });
 
+    this.socketService
+      .getAuth()
+      .subscribe(msg => {
+        console.log('Incoming msg', msg);
+      });
+
+    this.socketService
+      .getImage()
+      .subscribe(msg => {
+        console.log('Incoming Image', msg);
+        // this.onDrawingEvent(msg);
+        if (msg.type === 'bgImage') {
+          this.onBGimgUpdate(msg, false);
+        }
+
+      });
+
     // To watch if color change
     this.initService.lineColor.subscribe(data => {
       console.log('lineColor : ', data);
@@ -230,7 +247,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   sendImage(e, emit) {
     if (emit) {
-      this.sendMsg(e);
+      // this.sendMsg(e);
+      this.socketService.sendImage(e);
     }
   }
 

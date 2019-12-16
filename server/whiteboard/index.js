@@ -8,13 +8,20 @@ app.use(express.static(__dirname + '/public'));
 
 function onConnection(socket) {
     console.log("Socket.id : " + socket.id);
-    //console.log("Socket.rooms : ", socket.rooms);
-    //console.log("Socket.client : ", socket.client);
-    //console.log("Socket.conn : ", socket.conn);
 
     socket.on('drawing', (data) => {
-        //console.log(data);
         socket.broadcast.emit('drawing', data);
+        console.log(data);
+    });
+
+    socket.on('auth', (data) => {
+        socket.broadcast.emit('auth', data);
+        console.log(data);
+    });
+
+    socket.on('image', (data) => {
+        socket.broadcast.emit('image', data);
+        console.log(data);
     });
 
     socket.on('disconnect', function() {

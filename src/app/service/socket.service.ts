@@ -16,8 +16,24 @@ export class SocketService {
       .pipe(map(data => data));
   }
 
+  getAuth() {
+    return this.socket
+      .fromEvent<any>('auth')
+      .pipe(map(data => data));
+  }
+
+  getImage() {
+    return this.socket
+      .fromEvent<any>('image')
+      .pipe(map(data => data));
+  }
+
   sendMessage(msg: any) {
     this.socket.emit('drawing', msg);
+  }
+
+  sendImage(msg: any) {
+    this.socket.emit('image', msg);
   }
 
 }
