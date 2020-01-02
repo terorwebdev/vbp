@@ -1,0 +1,23 @@
+.container {
+    width: 100%;
+    flex-wrap: wrap;
+    text-align: center;
+    display: flex;
+    vertical-align: middle;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.box {
+    width: 100%;
+    max-width: 30%;
+    border: 1px solid red;
+    margin: 5px;
+}

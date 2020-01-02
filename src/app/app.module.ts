@@ -8,6 +8,7 @@ import { LayoutComponent } from './nav/layout/layout.component';
 import { InitComponent } from './nav/init/init.component';
 import { LeftNavComponent } from './nav/left-nav/left-nav.component';
 import { RightNavComponent } from './nav/right-nav/right-nav.component';
+import { MainComponent } from './main/main.component';
 
 import { UploadViewComponent } from './upload/upload-view/upload-view.component';
 import { UploadViewService } from './upload/upload-view/upload-view.service';
@@ -16,19 +17,37 @@ import { InitService } from './service/init.service';
 import { LeftNavService } from './service/left-nav.service';
 import { RightNavService } from './service/right-nav.service';
 import { LayoutService } from './service/layout.service';
+import { AuthService } from './service/auth.service';
+import { ViewsService } from './service/views.service';
 
 import { MyMaterialModule } from './material.module';
 import { UploadModalModule } from './upload/upload-modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MasterComponent } from './master/master.component';
+import { LoginComponent } from './master/login/login.component';
+
+import { StudentAuthService } from './service/student-auth.service';
+import { StudentComponent } from './student/student.component';
+import { ModalUserComponent } from './student/modal-user/modal-user.component';
+
+// db connection
+import { ConnService } from './db/conn.service';
+
 @NgModule({
   declarations: [
     AppComponent,
+    MainComponent,
     LayoutComponent,
     LeftNavComponent,
     RightNavComponent,
     UploadViewComponent,
-    InitComponent
+    InitComponent,
+    MasterComponent,
+    LoginComponent,
+    StudentComponent,
+
+    ModalUserComponent
   ],
   imports: [
     BrowserModule,
@@ -38,12 +57,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UploadModalModule
   ],
   providers: [
+    // db
+    ConnService,
+    // socket
     SocketService,
+    // master
+    AuthService,
+    // current view
+    ViewsService,
+
+    StudentAuthService,
+
     InitService,
     LeftNavService,
     RightNavService,
     LayoutService,
-    UploadViewService
+    UploadViewService,
   ],
   bootstrap: [AppComponent]
 })

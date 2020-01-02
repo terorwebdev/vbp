@@ -32,6 +32,10 @@ export class SocketService {
     this.socket.emit('drawing', msg);
   }
 
+  sendStudent(msg: any) {
+    this.socket.emit('auth', msg);
+  }
+
   sendImage(msg: any) {
     this.socket.emit('image', msg);
   }
