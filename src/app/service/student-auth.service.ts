@@ -10,9 +10,16 @@ export class StudentAuthService {
     public socketService: SocketService
     ) { }
 
+    init() {
+      let user = sessionStorage.getItem('student-username');
+      if (user === null || user === undefined) {
+        sessionStorage.setItem('student-username', null);
+      }
+    }
+
   authenticate(username, password) {
     if (username !== '' && password === 'student') {
-      sessionStorage.setItem('username', username);
+      sessionStorage.setItem('student-username', username);
       this.masterConnect();
       return true;
     } else {
@@ -21,17 +28,21 @@ export class StudentAuthService {
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('student_username');
+    let user = sessionStorage.getItem('student-username');
     console.log(!(user === null));
     return !(user === null);
   }
 
+  user() {
+    return sessionStorage.getItem('student-username');
+  }
+
   masterConnect() {
-    let user = sessionStorage.getItem('student_username');
-    this.socketService.sendStudent({student_auth: user});
+    let user = sessionStorage.getItem('student-username');
+    this.socketService.sendMasterMessage({student_auth: user});
   }
 
   logOut() {
-    sessionStorage.removeItem('student_username');
+    sessionStorage.removeItem('student-username');
   }
 }

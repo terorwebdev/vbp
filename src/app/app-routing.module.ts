@@ -5,13 +5,16 @@ import { LayoutComponent } from './nav/layout/layout.component';
 import { InitComponent } from './nav/init/init.component';
 import { LeftNavComponent } from './nav/left-nav/left-nav.component';
 import { RightNavComponent } from './nav/right-nav/right-nav.component';
-
+import { MainComponent } from './main/main.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const path = 'http://' + window.location.hostname + ':3000';
+
+const config: SocketIoConfig = { url: path, options: {} };
 
 const routes: Routes = [
-  { path: '', component: InitComponent },
+  { path: '', component: MainComponent },
+  { path: 'init', component: InitComponent },
   { path: 'layout', component: LayoutComponent },
   { path: 'left', component: LeftNavComponent },
   { path: 'right', component: RightNavComponent }

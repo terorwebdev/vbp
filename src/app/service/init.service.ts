@@ -6,14 +6,24 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class InitService {
 
   @Output() toggleLeft: EventEmitter<any> = new EventEmitter();
+  @Output() toggleRight: EventEmitter<any> = new EventEmitter();
   @Output() lineColor: EventEmitter<any> = new EventEmitter();
   @Output() lineSize: EventEmitter<any> = new EventEmitter();
   @Output() lineStyle: EventEmitter<any> = new EventEmitter();
+  @Output() openUpload: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   viewLeft() {
     this.toggleLeft.emit({});
+  }
+
+  viewRight() {
+    this.toggleRight.emit({});
+  }
+
+  viewUpload() {
+    this.openUpload.emit({});
   }
 
   setLineColor(item: any) {

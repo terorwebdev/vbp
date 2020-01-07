@@ -2,6 +2,10 @@ import { InitService } from './../../service/init.service';
 import { LayoutService } from './../../service/layout.service';
 import { Component, HostListener, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { SocketService } from '../../service/socket.service';
+import { StudentAuthService } from '../../service/student-auth.service';
+import { StatusPositionService } from '../../service/status-position.service';
+import { HistoryService } from '../../service/history.service';
+
 
 @Component({
   selector: 'app-layout',
@@ -22,9 +26,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   drawing = false;
   loadimage = false;
 
+  allowDrawing = false;
+
+  position = null;
+
   constructor(
     private socketService: SocketService,
     private initService: InitService,
+    public statusPosition: StatusPositionService,
+    public StudentAuth: StudentAuthService,
+    public historyService : HistoryService,
     private layoutService: LayoutService,
     private render: Renderer2
   ) { }
@@ -33,6 +44,15 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   onResize(event) {
     this.canvas.width = event.target.innerWidth;
     this.canvas.height = event.target.innerHeight;
+
+    this.historyService.getHistory().subscribe((data: any) => {
+      const list = data.data;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
+      for (const item of list) {
+        this.drawLine(item.x0 * w, item.y0 * h, item.x1 * w, item.y1 * h, item.color, item.line_style, item.font_size, false);
+      }
+    });
   }
 
   initResize() {
@@ -42,37 +62,46 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // To watch incomming socket message
+    this.position = this.statusPosition.getPosition();
+
+    this.historyService.getHistory().subscribe((data: any) => {
+      console.log(data);
+      const list = data.data;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
+      for (const item of list) {
+        this.drawLine(item.x0 * w, item.y0 * h, item.x1 * w, item.y1 * h, item.color, item.line_style, item.font_size, false);
+      }
+    });
+
     this.socketService
-      .getMessage()
+      .getDrawingMessage()
       .subscribe(msg => {
-        console.log('Incoming msg', msg);
-        // this.onDrawingEvent(msg);
-        if (msg.type === 'bgImage') {
-          this.onBGimgUpdate(msg, false);
+        console.log('Incoming Drawing msg', msg);
+        if (msg.type === 'ReloadWindow'){
+          document.location.reload();
+        } else {
+        this.onDrawingEvent(msg);
         }
-
-        if (msg.type === 'line') {
-          // console.log(msg);
-          this.onDrawingEvent(msg);
-        }
-
       });
 
     this.socketService
-      .getAuth()
+      .getAuthStudent()
       .subscribe(msg => {
-        console.log('Incoming msg', msg);
+        console.log('Incoming Student msg', msg);
+        if (msg.name === this.StudentAuth.user()) {
+          console.log(this.StudentAuth.user() +' Allow Drawing '+ msg.allow);
+          this.allowDrawing = msg.allow;
+        } else {
+          this.StudentAuth.masterConnect();
+        }
       });
 
     this.socketService
       .getImage()
       .subscribe(msg => {
         console.log('Incoming Image', msg);
-        // this.onDrawingEvent(msg);
-        if (msg.type === 'bgImage') {
-          this.onBGimgUpdate(msg, false);
-        }
-
+        this.onBGimgUpdate(msg, false);
       });
 
     // To watch if color change
@@ -102,7 +131,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   sendMsg(msg: any) {
-    this.socketService.sendMessage(msg);
+    this.socketService.sendDrawingMessage(msg);
   }
 
   initCanvas() {
@@ -185,7 +214,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onDrawingEvent(data) {
+  onDrawingEvent(data: any): void {
     const w = this.canvas.width;
     const h = this.canvas.height;
     console.log(w);
@@ -203,14 +232,18 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   onMouseUp(e) {
     if (!this.drawing) { return; }
     this.drawing = false;
+    if (this.position === 'Teacher' || this.allowDrawing) {
     this.drawLine(this.current.x, this.current.y, e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY, this.current.color, this.current.lineStyle, this.current.fontSize, true);
+    }
   }
 
   onMouseMove(e) {
     if (!this.drawing) { return; }
+    if (this.position === 'Teacher' || this.allowDrawing) {
     this.drawLine(this.current.x, this.current.y, e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY, this.current.color, this.current.lineStyle, this.current.fontSize, true);
     this.current.x = e.clientX || e.touches[0].clientX;
     this.current.y = e.clientY || e.touches[0].clientY;
+    }
   }
 
   onFontSizeUpdate(e: number) {

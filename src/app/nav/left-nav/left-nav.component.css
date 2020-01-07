@@ -19,6 +19,12 @@
     width: 48px;
 }
 
+.pickColor {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+}
+
 .menu-item {
     padding-left: 5px;
     padding-top: 5px;

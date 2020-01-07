@@ -8,7 +8,8 @@
 
 <div class="menu-item">
     <h3>
-        Pick Color
+        Pick Color :
+        <div class="pickColor" [ngStyle]="{'background-color': currentColor.hex}"></div>
     </h3>
     <div class="colors">
         <div class="color" *ngFor="let item of colorList" [ngStyle]="{'background-color': item.hex}" (click)="toggleColor(item)"></div>

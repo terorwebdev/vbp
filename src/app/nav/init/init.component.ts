@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InitService } from '../../service/init.service';
+import { AuthService } from '../../service/auth.service';
+import { StudentAuthService } from '../../service/student-auth.service';
+import { StatusPositionService } from '../../service/status-position.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-init',
@@ -8,21 +12,60 @@ import { InitService } from '../../service/init.service';
 })
 export class InitComponent implements OnInit {
 
-  show = false;
+  showLeft = false;
+  showRight = false;
+  position = 'Teacher';
+
   constructor(
+    private router: Router,
+    public statusPosition: StatusPositionService,
+    public authService: AuthService,
+    public StudentAuth: StudentAuthService,
     private initService: InitService
   ) {
     this.initService.toggleLeft.subscribe(data => {
       console.log('clicked');
-      this.toggle();
+      this.toggleLeft();
+    });
+
+    this.initService.toggleRight.subscribe(data => {
+      console.log('clicked');
+      this.toggleRight();
     });
   }
 
   ngOnInit() {
+    this.position = this.statusPosition.getPosition();
+
+    if (this.position === "Teacher") {
+      const status = this.authService.isUserLoggedIn();
+      if (status) {
+        // route
+      } else {
+        // not route back
+        this.router.navigate(['']);
+        console.log("route to layout");
+      }
+    } else {
+      // this.statusPosition.setPosition(result.position);
+      const status = this.StudentAuth.isUserLoggedIn();
+      if (status) {
+        // route
+        this.StudentAuth.masterConnect();
+      } else {
+        // not route back
+        this.router.navigate(['']);
+        console.log("route to layout");
+      }
+    }
   }
 
-  toggle() {
-    this.show = !this.show;
+  toggleLeft() {
+    this.showLeft = !this.showLeft;
+  }
+
+  toggleRight() {
+    this.showRight = !this.showRight;
   }
 
 }

@@ -4,9 +4,11 @@ var logs = require('./logs');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
+const router = express.Router();
+var cors = require('cors');
 
 app.use(express.static(__dirname + '/public'));
-file();
+app.use(cors());
 
 function onConnection(socket) {
     console.log("Socket.id : " + socket.id);
@@ -16,8 +18,16 @@ function onConnection(socket) {
         logs.write(JSON.stringify(data));
     });
 
-    socket.on('auth', (data) => {
-        socket.broadcast.emit('auth', data);
+    socket.on('auth-master', (data) => {
+        const item = data;
+        item.type = 'Connect';
+        item.id = socket.id;
+        socket.broadcast.emit('auth-master', item);
+        console.log(item);
+    });
+
+    socket.on('auth-student', (data) => {
+        socket.broadcast.emit('auth-student', data);
         console.log(data);
     });
 
@@ -27,11 +37,24 @@ function onConnection(socket) {
     });
 
     socket.on('disconnect', function() {
-        console.log(socket.id + " disconnected");
+        const item = { type: 'Disconnect', id: socket.id };
+        socket.broadcast.emit('auth-master', item);
+        console.log("Disconnected", item);
     });
 }
 
 io.on('connection', onConnection);
+
+router.get('/history', function(req, res) {
+    res.json({ data: file() });
+});
+
+router.get('/clearHistory', function(req, res) {
+    logs.clear();
+    res.json({ data: "Done" });
+});
+
+app.use('/api', router);
 
 http.listen(port, () => {
     console.log('listening on port ' + port)
@@ -39,7 +62,9 @@ http.listen(port, () => {
 
 function file() {
     var s = logs.read();
-    var test = s.substring(0, s.length - 2);
+    var test = s.substring(0, s.length - 1);
     var make = '[' + test + ']';
-    console.log(JSON.parse(make));
+    //console.log(make);
+    //console.log(JSON.parse(make));
+    return JSON.parse(make);
 }

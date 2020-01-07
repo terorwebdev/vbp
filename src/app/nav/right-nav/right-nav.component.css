@@ -1,0 +1,22 @@
+.closeRight {
+    position: absolute;
+    cursor: pointer;
+    left: 5px;
+    top: 20px;
+}
+
+.box-opener {
+    padding: 5px;
+    z-index: 1;
+    text-align: center;
+}
+
+.box-opener1 {
+    padding: 5px;
+    z-index: 1;
+}
+
+.box-opener2 {
+    padding: 5px;
+    z-index: 1;
+}

@@ -31,6 +31,10 @@ import { StudentAuthService } from './service/student-auth.service';
 import { StudentComponent } from './student/student.component';
 import { ModalUserComponent } from './student/modal-user/modal-user.component';
 
+import { StatusPositionService } from './service/status-position.service';
+
+import { HistoryService } from './service/history.service';
+
 // db connection
 import { ConnService } from './db/conn.service';
 
@@ -65,8 +69,13 @@ import { ConnService } from './db/conn.service';
     AuthService,
     // current view
     ViewsService,
-
+    // what position master/student
+    StatusPositionService,
+    // student
     StudentAuthService,
+
+    // history
+    HistoryService,
 
     InitService,
     LeftNavService,
@@ -74,6 +83,9 @@ import { ConnService } from './db/conn.service';
     LayoutService,
     UploadViewService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalUserComponent
+  ]
 })
 export class AppModule { }

@@ -1,13 +1,18 @@
-<div class="box-opener" (click)="toggle()">
+<div class="box-openerLeft" (click)="toggleLeft()">
     <mat-icon>settings_applications</mat-icon>
     <mat-icon>undo</mat-icon>
     <mat-icon>redo</mat-icon>
 </div>
 
-<app-left-nav class="left" [class.opened]="show">
+<div class="box-openerRight" *ngIf="position==='Teacher'" (click)="toggleRight()">
+    <mat-icon>settings_applications</mat-icon>
+</div>
+
+<app-left-nav class="left" [class.opened]="showLeft">
 </app-left-nav>
 
 <app-layout></app-layout>
 
-<app-right-nav class="right"></app-right-nav>
+<app-right-nav class="right" [class.opened]="showRight"></app-right-nav>
+
 <app-upload-view></app-upload-view>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadModalService } from '../upload-modal';
 import { LayoutService } from '../../service/layout.service';
+import { InitService } from '../../service/init.service';
 
 @Component({
   selector: 'app-upload-view',
@@ -15,8 +16,14 @@ export class UploadViewComponent implements OnInit {
 
   constructor(
     private modalService: UploadModalService,
+    private initService: InitService,
     private layoutService: LayoutService
-  ) { }
+  ) {
+    this.initService.openUpload.subscribe(data => {
+      console.log('clicked');
+      this.openModal('custom-modal-1');
+    });
+  }
 
   ngOnInit() {
   }

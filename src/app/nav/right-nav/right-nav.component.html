@@ -1,1 +1,29 @@
-<p>right-nav works!</p>
+<div class="box-opener">
+    <h3>Master Setting</h3>
+</div>
+
+<div class="closeRight">
+    <mat-icon (click)="toggle()">clear</mat-icon>
+</div>
+
+<div class="box-opener1">
+    <div>Image : <button (click)="openUpload()">Insert</button></div>
+</div>
+
+<div class="box-opener2">
+    <h4 style="text-align: center;">History</h4>
+    <p> Press <button (click)="clearLayout()">Clear</button> to clean whiteboard</p>
+</div>
+
+<div class="box-opener2">
+    <h4 style="text-align: center;">Access Right</h4>
+
+    <p style="font-size: 14px;">Total Student : {{studentList.length}} </p>
+    <div><button (click)="allowAll()">Allow All</button> <button (click)="disAllowAll()">Disallow All</button></div>
+
+    <ul>
+        <li *ngFor="let item of studentList">
+            <input type="checkbox" [(ngModel)]="item.allow" (change)="onChange(item)">{{item.name}}
+        </li>
+    </ul>
+</div>

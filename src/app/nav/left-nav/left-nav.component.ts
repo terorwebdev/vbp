@@ -10,6 +10,8 @@ export class LeftNavComponent implements OnInit {
 
   fontSize = 5;
 
+  currentColor = { name: 'black', hex: '#000000' };
+
   colorList: any = [
     { name: 'black', hex: '#000000' },
     { name: 'silver', hex: '#c0c0c0' },
@@ -48,6 +50,7 @@ export class LeftNavComponent implements OnInit {
   }
 
   toggleColor(item: any): void {
+    this.currentColor = item;
     this.initService.setLineColor(item);
   }
 

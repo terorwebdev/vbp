@@ -1,6 +1,15 @@
-.box-opener {
+.box-openerLeft {
     cursor: pointer;
     position: absolute;
+    padding: 20px;
+    display: inline-block;
+    z-index: 1;
+}
+
+.box-openerRight {
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
     padding: 20px;
     display: inline-block;
     z-index: 1;
@@ -21,6 +30,7 @@
     z-index: 1;
     position: absolute;
     height: 100%;
+    width: 240px;
     max-width: 240px;
     transition: ease-in-out 600ms max-width;
 }
@@ -32,4 +42,19 @@
 .right {
     position: absolute;
     right: 0px;
+    z-index: 1;
+    background-color: #FFCC55;
+    height: 100%;
+    max-width: 0px;
+    overflow-y: auto;
+    transition: ease-in-out 400ms max-width;
+}
+
+.right.opened {
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 240px;
+    max-width: 240px;
+    transition: ease-in-out 600ms max-width;
 }

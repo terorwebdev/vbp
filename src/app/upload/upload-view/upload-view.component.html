@@ -1,13 +1,17 @@
-<div style="position:absolute; left: 300px;">
+<!--
+  <div style="position:absolute; left: 300px;">
     <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
 </div>
+-->
 
 <jw-modal id="custom-modal-1">
     <h3>Upload</h3>
     <p>Only Support Image Only (png / jpg / jpeg)</p>
     <span style="color:red;" *ngIf="message">{{message}}</span>
     <input #file type="file" accept='image/*' (change)="preview(file.files)" />
-    <img [src]="imgURL" height="200" *ngIf="imgURL">
+    <br />
+    <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
+    <br />
     <button (click)="addBGimage()">Insert</button>
     <button (click)="closeModal('custom-modal-1')">Close</button>
 </jw-modal>

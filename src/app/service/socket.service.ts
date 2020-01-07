@@ -10,15 +10,21 @@ export class SocketService {
 
   constructor(private socket: Socket) { }
 
-  getMessage() {
+  getDrawingMessage() {
     return this.socket
       .fromEvent<any>('drawing')
       .pipe(map(data => data));
   }
 
-  getAuth() {
+  getAuthMaster() {
     return this.socket
-      .fromEvent<any>('auth')
+      .fromEvent<any>('auth-master')
+      .pipe(map(data => data));
+  }
+
+  getAuthStudent() {
+    return this.socket
+      .fromEvent<any>('auth-student')
       .pipe(map(data => data));
   }
 
@@ -28,12 +34,16 @@ export class SocketService {
       .pipe(map(data => data));
   }
 
-  sendMessage(msg: any) {
+  sendDrawingMessage(msg: any) {
     this.socket.emit('drawing', msg);
   }
 
-  sendStudent(msg: any) {
-    this.socket.emit('auth', msg);
+  sendStudentMessage(msg: any) {
+    this.socket.emit('auth-student', msg);
+  }
+
+  sendMasterMessage(msg: any) {
+    this.socket.emit('auth-master', msg);
   }
 
   sendImage(msg: any) {
