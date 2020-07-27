@@ -13,6 +13,20 @@ app.use(cors());
 function onConnection(socket) {
     console.log("Socket.id : " + socket.id);
 
+    //testing
+    socket.on('kclient-auth', (data) => {
+        if (data.cmd == 'req-auth') {
+            console.log("kclient-auth Received", data);
+            var res = {
+                cmd: 'rep-auth',
+                type: 'id',
+                data: socket.id
+            };
+            socket.broadcast.emit('kclient-auth', res);
+        }
+    });
+    //
+
     socket.on('drawing', (data) => {
         socket.broadcast.emit('drawing', data);
         logs.write(JSON.stringify(data));
