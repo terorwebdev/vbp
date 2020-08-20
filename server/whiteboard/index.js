@@ -87,6 +87,8 @@ router.get('/clearHistory', function(req, res) {
 
 app.use('/api', router);
 
+app.use('/*', express.static(__dirname + '/public'));
+
 http.listen(port, () => {
     console.log('listening on port ' + port)
 });
