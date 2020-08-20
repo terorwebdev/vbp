@@ -1,11 +1,22 @@
 <div class="box-openerLeft" (click)="toggleLeft()">
-    <mat-icon>settings_applications</mat-icon>
-    <mat-icon>undo</mat-icon>
-    <mat-icon>redo</mat-icon>
+    <span style="display: inline-flex;
+    font-size: large;font-family: 'Montserrat-Black';">
+        <mat-icon>apps</mat-icon>
+        &nbsp;
+        <img src="assets/img/magicboard_logo.png" width="24px" height="20px">
+        &nbsp;
+        Magic-board:Whiteboard
+    </span>
+    <!-- <mat-icon>undo</mat-icon>
+    <mat-icon>redo</mat-icon> -->
 </div>
 
 <div class="box-openerRight" *ngIf="position==='Teacher'" (click)="toggleRight()">
-    <mat-icon>settings_applications</mat-icon>
+    <mat-icon>settings_applications</mat-icon>  &nbsp; Setting
+</div>
+
+<div class="box-openerRightBottom" (click)="toggleChatbox()">
+    <mat-icon>chat</mat-icon> &nbsp; Open Chatbox
 </div>
 
 <app-left-nav class="left" [class.opened]="showLeft">
@@ -14,5 +25,7 @@
 <app-layout></app-layout>
 
 <app-right-nav class="right" [class.opened]="showRight"></app-right-nav>
+
+<app-chat-box class="rightchatbox" [class.opened]="showChatBox"></app-chat-box>
 
 <app-upload-view></app-upload-view>

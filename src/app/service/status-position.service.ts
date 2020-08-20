@@ -22,4 +22,12 @@ export class StatusPositionService {
     sessionStorage.setItem('status-position', position);
     return this.getPosition();
   }
+
+  getusername(): String {
+    if(this.getPosition() === 'Student') {
+      return sessionStorage.getItem('student-username').toString();
+    } else {
+      return sessionStorage.getItem('master-username').toString();
+    }
+  }
 }

@@ -128,6 +128,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       this.loadimage = true;
       this.onBGimgUpdate(data, true);
     });
+
+    this.layoutService.downloadImage.subscribe(data => {
+      console.log('Bg received : ', data);
+      this.download_as_image();
+    });
   }
 
   sendMsg(msg: any) {
@@ -141,6 +146,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.context.fillStyle = '#000000';
     console.log(this.context);
   }
+
+  download_as_image() {
+    const a: any = document.createElement('a');
+    a.href = this.canvas.toDataURL("image/png");
+    a.download = "magicboard.png";
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    a.click();
+    a.remove();
+  };
 
   ngAfterViewInit() {
 

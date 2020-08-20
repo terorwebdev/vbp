@@ -16,10 +16,15 @@
 </div>
 
 <div class="box-opener2">
+    <h4 style="text-align: center;">Export Sketch</h4>
+    <p style="text-align: center;"><button (click)="downloadimage()">Download as image</button></p>
+</div>
+
+<div class="box-opener2">
     <h4 style="text-align: center;">Access Right</h4>
 
     <p style="font-size: 14px;">Total Student : {{studentList.length}} </p>
-    <div><button (click)="allowAll()">Allow All</button> <button (click)="disAllowAll()">Disallow All</button></div>
+    <div style="text-align: center;"><button (click)="allowAll()">Allow All</button> <button (click)="disAllowAll()">Disallow All</button></div>
 
     <ul>
         <li *ngFor="let item of studentList">

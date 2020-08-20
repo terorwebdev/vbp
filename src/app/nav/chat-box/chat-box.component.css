@@ -1,0 +1,93 @@
+.closeRight {
+    cursor: pointer;
+    display: inline-flex;
+    left: 5px;
+    top: 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.box-opener {
+    padding: 5px;
+    z-index: 1;
+    text-align: center;
+}
+
+.box-opener1 {
+    padding: 5px;
+    z-index: 1;
+}
+
+.box-opener2 {
+    padding: 5px;
+    z-index: 1;
+}
+
+.bottomSend {
+    cursor: pointer;
+    bottom: 10px;
+    width: 100%;
+    display: inline-flex;
+}
+
+.chatlist {
+    background-color: white;
+    padding: 10px;
+    height: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.body2 {
+    display: flex;
+    height: 100%;
+  }
+
+  .fill-remaining-space {
+    /* This fills the remaining space, by using flexbox.
+ Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+  
+.row {
+display: flex;
+flex: 1;
+height: auto;
+border: 1px;
+}
+
+.column {
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex: 1;
+}
+
+.blue-column {
+height: auto;
+padding: 10px;
+display: inline-flex;
+}
+
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox.
+ Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+
+.blue-column-bottom {
+    display: inline-flex;
+    height: auto;
+    padding: 10px;
+    }
+
+.blue-column-full {
+    height: 100%;
+    padding: 10px;
+    }
+

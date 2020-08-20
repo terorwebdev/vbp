@@ -34,6 +34,12 @@ export class SocketService {
       .pipe(map(data => data));
   }
 
+  getMessage() {
+    return this.socket
+      .fromEvent<any>('message-chat')
+      .pipe(map(data => data));
+  }
+
   sendDrawingMessage(msg: any) {
     this.socket.emit('drawing', msg);
   }
@@ -48,6 +54,10 @@ export class SocketService {
 
   sendImage(msg: any) {
     this.socket.emit('image', msg);
+  }
+
+  sendMessage(msg: any) {
+    this.socket.emit('message-chat', msg);
   }
 
 }

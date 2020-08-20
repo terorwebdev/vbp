@@ -7,6 +7,7 @@ export class InitService {
 
   @Output() toggleLeft: EventEmitter<any> = new EventEmitter();
   @Output() toggleRight: EventEmitter<any> = new EventEmitter();
+  @Output() toggleChatbox: EventEmitter<any> = new EventEmitter();
   @Output() lineColor: EventEmitter<any> = new EventEmitter();
   @Output() lineSize: EventEmitter<any> = new EventEmitter();
   @Output() lineStyle: EventEmitter<any> = new EventEmitter();
@@ -20,6 +21,10 @@ export class InitService {
 
   viewRight() {
     this.toggleRight.emit({});
+  }
+
+  viewChatbox() {
+    this.toggleChatbox.emit({});
   }
 
   viewUpload() {

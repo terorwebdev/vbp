@@ -1,0 +1,25 @@
+<section class="body2">
+    <div class='row'>
+        <div class='column'>
+            <div class='blue-column'>
+                <mat-icon (click)="toggle()" style="position: absolute;cursor: pointer;">clear</mat-icon>
+                <span class="fill-remaining-space"></span>
+                <h3>Chatbox</h3>
+                <span class="fill-remaining-space"></span>
+            </div>
+            <div class='blue-column-full'>
+                <div style="height: 100%; background-color: white;overflow: auto;">
+                    <div *ngFor="let item of msg_list" style="display: inline-flex;width: 100%;">
+                        <span style="font-family: Montserrat-SemiBold;">{{item.name}}</span><span>&nbsp;:&nbsp;{{item.msg}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class='blue-column-bottom'>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="10" style="width: 100%;" [(ngModel)]='msg_to_send'></textarea>
+                &nbsp;
+                <mat-icon (click)="send_msg()" class="pointer">send</mat-icon>
+            </div>
+        </div>
+    </div>
+</section>

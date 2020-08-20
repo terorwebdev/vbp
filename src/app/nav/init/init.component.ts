@@ -14,6 +14,7 @@ export class InitComponent implements OnInit {
 
   showLeft = false;
   showRight = false;
+  showChatBox = false;
   position = 'Teacher';
 
   constructor(
@@ -31,6 +32,11 @@ export class InitComponent implements OnInit {
     this.initService.toggleRight.subscribe(data => {
       console.log('clicked');
       this.toggleRight();
+    });
+
+    this.initService.toggleChatbox.subscribe(data => {
+      console.log('clicked');
+      this.toggleChatbox();
     });
   }
 
@@ -66,6 +72,10 @@ export class InitComponent implements OnInit {
 
   toggleRight() {
     this.showRight = !this.showRight;
+  }
+
+  toggleChatbox() {
+    this.showChatBox = !this.showChatBox;
   }
 
 }

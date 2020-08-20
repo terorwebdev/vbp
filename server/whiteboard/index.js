@@ -5,8 +5,9 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 const router = express.Router();
-var cors = require('cors');
 
+var cors = require('cors');
+var imagedata = "";
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 
@@ -42,11 +43,26 @@ function onConnection(socket) {
 
     socket.on('auth-student', (data) => {
         socket.broadcast.emit('auth-student', data);
+
+        if(data.type === "reconnect") {
+             console.log("student this reconnect");
+             let img = {
+                 type: 'image',
+                 data: String(imagedata)
+             };
+             io.to(socket.id).emit('image', img);
+        }
         console.log(data);
     });
 
     socket.on('image', (data) => {
         socket.broadcast.emit('image', data);
+        console.log(data);
+        imagedata = data.data;
+    });
+
+    socket.on('message-chat', (data) => {
+        socket.broadcast.emit('message-chat', data);
         console.log(data);
     });
 
@@ -65,6 +81,7 @@ router.get('/history', function(req, res) {
 
 router.get('/clearHistory', function(req, res) {
     logs.clear();
+    imagedata = "";
     res.json({ data: "Done" });
 });
 

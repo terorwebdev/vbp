@@ -37,6 +37,7 @@ import { HistoryService } from './service/history.service';
 
 // db connection
 import { ConnService } from './db/conn.service';
+import { ChatBoxComponent } from './nav/chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ConnService } from './db/conn.service';
     MasterComponent,
     LoginComponent,
     StudentComponent,
+    ChatBoxComponent,
 
     ModalUserComponent
   ],

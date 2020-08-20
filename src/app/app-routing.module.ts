@@ -8,7 +8,7 @@ import { RightNavComponent } from './nav/right-nav/right-nav.component';
 import { MainComponent } from './main/main.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const path = 'http://' + window.location.hostname + ':3003';
+const path = 'http://' + window.location.hostname + ':3000';
 
 const config: SocketIoConfig = { url: path, options: {} };
 

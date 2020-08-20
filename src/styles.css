@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "assets/css/font-material_icons.css";
+@import "assets/css/font-roboto_300_400_500.css";
+@import "assets/css/font-montserrat.css";
 
 /**
  * Fix user-agent
@@ -14,4 +17,4 @@ body {
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Montserrat-Medium'; }

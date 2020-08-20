@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InitService } from '../../service/init.service';
 import { SocketService } from '../../service/socket.service';
 import { HistoryService } from '../../service/history.service';
+import { LayoutService } from '../../service/layout.service';
 
 @Component({
   selector: 'app-right-nav',
@@ -16,6 +17,7 @@ export class RightNavComponent implements OnInit {
     private initService: InitService,
     private historyService: HistoryService,
     private socketService: SocketService,
+    private layoutService: LayoutService
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,10 @@ export class RightNavComponent implements OnInit {
 
   onChange(item) {
     this.socketService.sendStudentMessage(item);
+  }
+
+  downloadimage() {
+    this.layoutService.to_download();
   }
 
   toggle(): void {
